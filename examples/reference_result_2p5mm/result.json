@@ -1,0 +1,100 @@
+{
+  "model": "3D conforming Cartesian Q1 hexahedral FEM on voxelized STEP board + lumped pizza/air; prescribed sequential vapor balance",
+  "official_metrics": {
+    "mass_g": 171.34560000000005,
+    "pizza_temperature_20min_C": 68.62491505236568,
+    "pizza_moisture_retention_20min_pct": 93.24795082597375,
+    "temperature_threshold_pass": true
+  },
+  "geometry": {
+    "step": "examples/reference_box.step",
+    "dxf": "examples/reference_net.dxf",
+    "flat": {
+      "area_m2": 0.28557600000000005,
+      "mass_g": 171.34560000000005,
+      "fold_count": 5,
+      "hole_count": 0,
+      "unit": 4,
+      "connected_sheet": true,
+      "warning": "2D topology only: folding kinematics, interpenetration and seals need separate verification."
+    },
+    "pizza_fit": {
+      "pizza_floor_inner_z_mm": 2.4347826086956523,
+      "free_pizza_clearance_mm": 17.043478260869566,
+      "pizza_disk_grid_points": 11313
+    },
+    "step_solid_mass_g": 166.29120000000066,
+    "mass_mismatch_fraction": 0.029498277166144848,
+    "bbox_mm": [
+      [
+        0.0,
+        326.0
+      ],
+      [
+        0.0,
+        326.0
+      ],
+      [
+        0.0,
+        56.0
+      ]
+    ],
+    "voxel_mm_actual": [
+      2.488549618320611,
+      2.488549618320611,
+      2.4347826086956523
+    ],
+    "board_voxel_mass_g": 136.4346216532431,
+    "volume_mesh_error_pct": -17.95439466836335,
+    "cavity_volume_m3": 0.005269282891733786,
+    "free_air_volume_m3": 0.004208995371147231,
+    "pizza_base_contact_m2": 0.0707536448924888
+  },
+  "numerics": {
+    "duration_s": 1200.0,
+    "dt_s": 10.0,
+    "requested_voxel_mm": 2.5,
+    "voxels_xyz": [
+      131,
+      131,
+      23
+    ],
+    "box_elements": 45242,
+    "degrees_freedom": 90498,
+    "average_CG_iterations": 4.083333333333333,
+    "geometry_aliasing": "The imported STEP is voxelized; check grid convergence before ranking close results.",
+    "time_integration": "backward Euler (1st order)",
+    "water_balance_error_g": 4.440892098500626e-13
+  },
+  "moisture": {
+    "initial_pizza_water_g": 300.00000000000006,
+    "initial_air_vapor_g": 0.04085115541915124,
+    "final_pizza_water_g": 279.7438524779213,
+    "final_wall_condensate_g": 19.980357836888498,
+    "final_air_vapor_g": 0.31664084060974357,
+    "retention_pct": 93.24795082597375,
+    "max_balance_error_g": 4.440892098500626e-13
+  },
+  "fluxes_20min_W": {
+    "pizza_to_air": 7.593054760992199,
+    "pizza_to_base": 25.33648857793257,
+    "air_to_box": 7.619993682593622,
+    "box_to_ambient": 6.1439036622140195,
+    "box_to_floor": 27.05037263742355
+  },
+  "assumptions": [
+    "One single closed STEP solid with one voxel-resolved sealed cavity.",
+    "STEP and DXF geometry in standard CAD units; center inferred from exterior box bounding box.",
+    "Pizza rests flat at center on inner base: its underside is coupled via h_contact.",
+    "Pizza top + cylindrical side exposed to internal air; pizza is spatially uniform.",
+    "Air is well mixed and uniform temperature; no spatial CFD or air-flow heat equation.",
+    "3D board conduction discretized by uniform Cartesian Q1 brick FEM; stair-stepped surface geometry.",
+    "Thermal radiation, edge leakage, vapor latent heat and evaporation cooling are neglected.",
+    "Moisture transport uses Buck water saturation vapor pressure and film temperatures (mean air/surface).",
+    "Condensation is unidirectional onto inner walls, without re-evaporation (no negative wall liquid).",
+    "Flat DXF validates cut-outline area and fold mark presence, not physical foldability."
+  ],
+  "officiality": "INDEPENDENT ESTIMATE, NOT AN OFFICIAL TA SCORE",
+  "runtime_s": 20.274079930999505,
+  "status": "temperature_pass"
+}

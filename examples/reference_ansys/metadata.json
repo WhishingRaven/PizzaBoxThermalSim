@@ -1,0 +1,193 @@
+{
+  "kind": "pizza-contest-ansys-mapdl",
+  "status": "prepared_not_run",
+  "officiality": "INDEPENDENT ESTIMATE - NOT TA RESULT",
+  "mesh_mode": "voxel",
+  "params": {
+    "pizza_diameter_m": 0.3,
+    "pizza_thickness_m": 0.015,
+    "pizza_mass_kg": 0.75,
+    "pizza_cp_J_kgK": 3000.0,
+    "box_k_W_mK": 0.08,
+    "box_density_kg_m3": 200.0,
+    "box_cp_J_kgK": 1400.0,
+    "air_density_kg_m3": 1.2,
+    "air_cp_J_kgK": 1005.0,
+    "T_pizza_initial_C": 90.0,
+    "T_environment_C": 22.0,
+    "h_internal_W_m2K": 3.0,
+    "h_external_W_m2K": 10.0,
+    "h_contact_W_m2K": 10.0,
+    "duration_s": 1200.0,
+    "water_fraction_initial": 0.4,
+    "RH_initial": 0.5,
+    "water_activity": 1.0,
+    "km_m_s": 0.001,
+    "Rv_J_kgK": 461.526,
+    "min_box_mass_g": 83.0,
+    "max_box_mass_g": 249.0,
+    "min_pizza_temperature_C": 68.0,
+    "nominal_board_thickness_m": 0.003
+  },
+  "dxf": "/mnt/data/pizza_box_contest/examples/reference_net.dxf",
+  "step": "/mnt/data/pizza_box_contest/examples/reference_box.step",
+  "mass_g": 171.34560000000005,
+  "step_mass_g": 166.29120000000066,
+  "cavity_volume_m3": 0.0051199999999999996,
+  "free_air_volume_m3": 0.004059712479413445,
+  "pizza_area_m2": 0.08482300164692441,
+  "contact_area_m2": 0.07060318727379941,
+  "inner_area_m2": 0.1983587139307702,
+  "mesh": {
+    "path": "/mnt/data/pizza_box_contest/examples/reference_ansys/run.inp",
+    "steps": 120,
+    "dt_s": 10.0,
+    "mesh_mm": 3.0,
+    "elements": 31106,
+    "nodes": 62224,
+    "surface_elements": 50339,
+    "pizza_node": 62226,
+    "air_node": 62225,
+    "pizza_air_conductance_W_K": 0.25446900494077324
+  },
+  "mesh_warnings": [
+    "Voxel staircase approximates true STEP boundary; perform mesh convergence.",
+    "SURF152 film effects use a lumped air node and area-averaged conditions."
+  ],
+  "pizza_fit": {
+    "pizza_floor_inner_z_mm": 2.947368421052632,
+    "free_pizza_clearance_mm": 17.684210526315788,
+    "pizza_disk_grid_points": 7809
+  },
+  "sensors": [
+    {
+      "id": 1,
+      "nodes": [
+        38136,
+        38137,
+        38247,
+        38246
+      ],
+      "area_m2": 0.010751384368673546
+    },
+    {
+      "id": 2,
+      "nodes": [
+        38189,
+        38190,
+        38300,
+        38299
+      ],
+      "area_m2": 0.018366875728164245
+    },
+    {
+      "id": 3,
+      "nodes": [
+        44076,
+        44077,
+        44187,
+        44186
+      ],
+      "area_m2": 0.024246922791365894
+    },
+    {
+      "id": 4,
+      "nodes": [
+        12212,
+        12213,
+        12323,
+        12322
+      ],
+      "area_m2": 0.009780014441456722
+    },
+    {
+      "id": 5,
+      "nodes": [
+        33583,
+        33584,
+        34448,
+        34447
+      ],
+      "area_m2": 0.017295114570366792
+    },
+    {
+      "id": 6,
+      "nodes": [
+        16606,
+        16607,
+        16717,
+        16716
+      ],
+      "area_m2": 0.010703256769986588
+    },
+    {
+      "id": 7,
+      "nodes": [
+        24877,
+        24878,
+        25742,
+        25741
+      ],
+      "area_m2": 0.028827859731814738
+    },
+    {
+      "id": 8,
+      "nodes": [
+        44011,
+        44012,
+        44122,
+        44121
+      ],
+      "area_m2": 0.018203152933255085
+    },
+    {
+      "id": 9,
+      "nodes": [
+        38233,
+        38234,
+        38344,
+        38343
+      ],
+      "area_m2": 0.017008376558769345
+    },
+    {
+      "id": 10,
+      "nodes": [
+        47120,
+        47121,
+        47231,
+        47230
+      ],
+      "area_m2": 0.016795226434068243
+    },
+    {
+      "id": 11,
+      "nodes": [
+        35059,
+        35063,
+        35927,
+        35923
+      ],
+      "area_m2": 0.01331182865167295
+    },
+    {
+      "id": 12,
+      "nodes": [
+        41622,
+        41623,
+        41733,
+        41732
+      ],
+      "area_m2": 0.013068700951098763
+    }
+  ],
+  "flat": {
+    "area_m2": 0.28557600000000005,
+    "mass_g": 171.34560000000005,
+    "fold_count": 5,
+    "hole_count": 0,
+    "unit": 4,
+    "connected_sheet": true,
+    "warning": "2D topology only: folding kinematics, interpenetration and seals need separate verification."
+  }
+}

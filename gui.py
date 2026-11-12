@@ -18,9 +18,9 @@ class PizzaApp(tk.Tk):
         self.geometry('970x710')
         self.q=queue.Queue();self.running=False
         self.step=tk.StringVar();self.dxf=tk.StringVar();self.job=tk.StringVar(value=str(ROOT/'results'/'team_01'))
-        self.fast_mesh=tk.StringVar(value='3.0');self.ansys_mesh=tk.StringVar(value='2.0')
+        self.fast_mesh=tk.StringVar(value='3.0');self.ansys_mesh=tk.StringVar(value='6.0')
         self.dt=tk.StringVar(value='10');self.sensors=tk.StringVar(value='64')
-        self.host=tk.StringVar(value='');self.nproc=tk.StringVar(value='4');self.mesh_mode=tk.StringVar(value='voxel')
+        self.host=tk.StringVar(value='');self.nproc=tk.StringVar(value='4');self.mesh_mode=tk.StringVar(value='shell')
         self.ansysexe=tk.StringVar()
         form=ttk.Frame(self,padding=15);form.pack(fill='x')
         form.columnconfigure(1,weight=1)
@@ -32,7 +32,7 @@ class PizzaApp(tk.Tk):
                                 ('Time step (s)',self.dt,7),('Wall samples',self.sensors,7)]:
             ttk.Label(row,text=label).pack(side='left',padx=(0,4));ttk.Entry(row,textvariable=var,width=width).pack(side='left',padx=(0,12))
         ttk.Label(row,text='ANSYS mesh type').pack(side='left',padx=(0,5))
-        ttk.Combobox(row,textvariable=self.mesh_mode,values=('voxel','step'),state='readonly',width=9).pack(side='left')
+        ttk.Combobox(row,textvariable=self.mesh_mode,values=('shell','voxel','step'),state='readonly',width=9).pack(side='left')
         row=ttk.Frame(form);row.grid(row=4,column=0,columnspan=3,sticky='ew',pady=(5,10))
         ttk.Label(row,text='SSH user@Tailscale-IP').pack(side='left',padx=(0,6))
         ttk.Entry(row,textvariable=self.host,width=27).pack(side='left',padx=(0,12))
@@ -85,7 +85,7 @@ class PizzaApp(tk.Tk):
     def quick(self):
         if not self.validate_paths():return
         self.execute([sys.executable,str(ROOT/'simulator.py'),'--step',self.step.get(),'--dxf',self.dxf.get(),
-                      '--out',self.job.get(),'--voxel-mm',self.fast_mesh.get(),'--dt',self.dt.get()])
+                      '--out',self.job.get(),'--mesh-mm',self.fast_mesh.get(),'--dt',self.dt.get()])
     def prepare(self):
         if not self.validate_paths():return
         self.execute([sys.executable,str(ROOT/'ansys_bridge.py'),'prepare','--step',self.step.get(),

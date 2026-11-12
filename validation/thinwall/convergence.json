@@ -1,0 +1,422 @@
+{
+  "convergence": {
+    "reference_python": {
+      "successive_refinements": [
+        {
+          "coarse_mm": 24.0,
+          "fine_mm": 12.0,
+          "delta_C": 0.01567601107424821,
+          "relative_delta_temperature_rise": 0.00033128815199748405,
+          "delta_cardboard_heat_loss_J": -37.76482185819623,
+          "relative_delta_cardboard_heat_loss": 0.000831495568362048
+        },
+        {
+          "coarse_mm": 12.0,
+          "fine_mm": 6.0,
+          "delta_C": 0.01204912808182712,
+          "relative_delta_temperature_rise": 0.00025457478703184386,
+          "delta_cardboard_heat_loss_J": -29.754740765114548,
+          "relative_delta_cardboard_heat_loss": 0.000655561262159425
+        },
+        {
+          "coarse_mm": 6.0,
+          "fine_mm": 4.58257569495584,
+          "delta_C": 0.002006191044770844,
+          "relative_delta_temperature_rise": 4.2385142503232e-05,
+          "delta_cardboard_heat_loss_J": -4.928775583866809,
+          "relative_delta_cardboard_heat_loss": 0.00010860337443671375
+        },
+        {
+          "coarse_mm": 4.58257569495584,
+          "fine_mm": 3.5,
+          "delta_C": 0.001218215185332383,
+          "relative_delta_temperature_rise": 2.5736778890466927e-05,
+          "delta_cardboard_heat_loss_J": -2.9175219288954395,
+          "relative_delta_cardboard_heat_loss": 6.429042906844874e-05
+        },
+        {
+          "coarse_mm": 3.5,
+          "fine_mm": 3.0,
+          "delta_C": 0.0005116332114027955,
+          "relative_delta_temperature_rise": 1.0808967630029714e-05,
+          "delta_cardboard_heat_loss_J": -1.2512417976249708,
+          "relative_delta_cardboard_heat_loss": 2.7573088414305637e-05
+        },
+        {
+          "coarse_mm": 3.0,
+          "fine_mm": 2.5,
+          "delta_C": 0.0004432934134968036,
+          "relative_delta_temperature_rise": 9.365106050554891e-06,
+          "delta_cardboard_heat_loss_J": -1.0726040786830708,
+          "relative_delta_cardboard_heat_loss": 2.363708295079967e-05
+        },
+        {
+          "coarse_mm": 2.5,
+          "fine_mm": 2.0,
+          "delta_C": 0.0003500226215891189,
+          "relative_delta_temperature_rise": 7.394593810783237e-06,
+          "delta_cardboard_heat_loss_J": -0.8494877709526918,
+          "relative_delta_cardboard_heat_loss": 1.8720597101356786e-05
+        },
+        {
+          "coarse_mm": 2.0,
+          "fine_mm": 1.5,
+          "delta_C": 0.00028295643976150586,
+          "relative_delta_temperature_rise": 5.977714872321689e-06,
+          "delta_cardboard_heat_loss_J": -0.6941743471907103,
+          "relative_delta_cardboard_heat_loss": 1.5298109661656697e-05
+        }
+      ],
+      "observed_order": 1.7795610619468336,
+      "richardson_temperature_C": 69.33566585081012,
+      "fine_grid_GCI_relative_temperature_rise": 1.1812711056902143e-05,
+      "effective_surface_spacing_m": [
+        0.0039308104999402705,
+        0.001959351709979607,
+        0.000984064914419658
+      ],
+      "effective_refinement_ratios": [
+        2.0061791254318413,
+        1.9910797359695667
+      ],
+      "gci_grids_mm": [
+        6.0,
+        3.0,
+        1.5
+      ]
+    },
+    "reference_ansys": {
+      "successive_refinements": [
+        {
+          "coarse_mm": 24.0,
+          "fine_mm": 12.0,
+          "delta_C": 0.031022982999999726,
+          "relative_delta_temperature_rise": 0.0006558936784773115,
+          "delta_cardboard_heat_loss_J": -75.88798846001737,
+          "relative_delta_cardboard_heat_loss": 0.001669144473572275
+        },
+        {
+          "coarse_mm": 12.0,
+          "fine_mm": 6.0,
+          "delta_C": 0.02379215699998838,
+          "relative_delta_temperature_rise": 0.0005027653097685603,
+          "delta_cardboard_heat_loss_J": -57.92687490997923,
+          "relative_delta_cardboard_heat_loss": 0.0012757179643662425
+        },
+        {
+          "coarse_mm": 6.0,
+          "fine_mm": 4.58257569495584,
+          "delta_C": 0.004671116000011466,
+          "relative_delta_temperature_rise": 9.869820934799766e-05,
+          "delta_cardboard_heat_loss_J": -11.572625220025657,
+          "relative_delta_cardboard_heat_loss": 0.0002549277777071143
+        },
+        {
+          "coarse_mm": 4.58257569495584,
+          "fine_mm": 3.5,
+          "delta_C": 0.0030155259999986583,
+          "relative_delta_temperature_rise": 6.371240917742425e-05,
+          "delta_cardboard_heat_loss_J": -7.215967489981267,
+          "relative_delta_cardboard_heat_loss": 0.0001589823378270267
+        }
+      ],
+      "observed_order": 1.4666211250589791,
+      "richardson_temperature_C": 69.3366045404299,
+      "fine_grid_GCI_relative_temperature_rise": 0.00016710084373777802,
+      "effective_surface_spacing_m": [
+        0.0039308104999402705,
+        0.0029814036494290384,
+        0.0022856535245710263
+      ],
+      "effective_refinement_ratios": [
+        1.3184429088268712,
+        1.3043987714579754
+      ],
+      "gci_grids_mm": [
+        6.0,
+        4.58257569495584,
+        3.5
+      ]
+    },
+    "rounded_python": {
+      "successive_refinements": [
+        {
+          "coarse_mm": 24.0,
+          "fine_mm": 12.0,
+          "delta_C": 0.021458049832830284,
+          "relative_delta_temperature_rise": 0.0004526672788825622,
+          "delta_cardboard_heat_loss_J": -52.741507816266676,
+          "relative_delta_cardboard_heat_loss": 0.0011660137981112841
+        },
+        {
+          "coarse_mm": 12.0,
+          "fine_mm": 6.0,
+          "delta_C": 0.01120324934153416,
+          "relative_delta_temperature_rise": 0.00023628177617785593,
+          "delta_cardboard_heat_loss_J": -27.31756109149137,
+          "relative_delta_cardboard_heat_loss": 0.0006043039565495725
+        },
+        {
+          "coarse_mm": 6.0,
+          "fine_mm": 4.58257569495584,
+          "delta_C": 0.00199214280173976,
+          "relative_delta_temperature_rise": 4.201345959683474e-05,
+          "delta_cardboard_heat_loss_J": -4.755068874073913,
+          "relative_delta_cardboard_heat_loss": 0.00010520006591227425
+        },
+        {
+          "coarse_mm": 4.58257569495584,
+          "fine_mm": 3.5,
+          "delta_C": 0.0012371937206410166,
+          "relative_delta_temperature_rise": 2.609121803934692e-05,
+          "delta_cardboard_heat_loss_J": -3.0050515211114543,
+          "relative_delta_cardboard_heat_loss": 6.648749897506205e-05
+        },
+        {
+          "coarse_mm": 3.5,
+          "fine_mm": 3.0,
+          "delta_C": 0.0004916899414695308,
+          "relative_delta_temperature_rise": 1.0369157418816301e-05,
+          "delta_cardboard_heat_loss_J": -1.1776728819604614,
+          "relative_delta_cardboard_heat_loss": 2.6056979142400188e-05
+        },
+        {
+          "coarse_mm": 3.0,
+          "fine_mm": 2.5,
+          "delta_C": 0.0004339564001298868,
+          "relative_delta_temperature_rise": 9.151541787979458e-06,
+          "delta_cardboard_heat_loss_J": -1.0490145425210358,
+          "relative_delta_cardboard_heat_loss": 2.321084651096199e-05
+        },
+        {
+          "coarse_mm": 2.5,
+          "fine_mm": 2.0,
+          "delta_C": 0.00035451666606434173,
+          "relative_delta_temperature_rise": 7.476211498263627e-06,
+          "delta_cardboard_heat_loss_J": -0.8534268161529326,
+          "relative_delta_cardboard_heat_loss": 1.8883563663871788e-05
+        },
+        {
+          "coarse_mm": 2.0,
+          "fine_mm": 1.5,
+          "delta_C": 0.0002807707425773742,
+          "relative_delta_temperature_rise": 5.920988281258701e-06,
+          "delta_cardboard_heat_loss_J": -0.6867586477746954,
+          "relative_delta_cardboard_heat_loss": 1.5195969320024464e-05
+        }
+      ],
+      "observed_order": 1.8368574240008788,
+      "richardson_temperature_C": 69.41999187658647,
+      "fine_grid_GCI_relative_temperature_rise": 1.1012638168331226e-05,
+      "effective_surface_spacing_m": [
+        0.0038845081389737093,
+        0.0019632816870706867,
+        0.0009835780022456597
+      ],
+      "effective_refinement_ratios": [
+        1.9785791130001256,
+        1.9960609962689415
+      ],
+      "gci_grids_mm": [
+        6.0,
+        3.0,
+        1.5
+      ]
+    },
+    "rounded_ansys": {
+      "successive_refinements": [
+        {
+          "coarse_mm": 24.0,
+          "fine_mm": 12.0,
+          "delta_C": 0.03805727299999262,
+          "relative_delta_temperature_rise": 0.000803156011104407,
+          "delta_cardboard_heat_loss_J": -91.44044293000479,
+          "relative_delta_cardboard_heat_loss": 0.002019551687961404
+        },
+        {
+          "coarse_mm": 12.0,
+          "fine_mm": 6.0,
+          "delta_C": 0.022371958000007908,
+          "relative_delta_temperature_rise": 0.0004719122451899307,
+          "delta_cardboard_heat_loss_J": -53.890952390000166,
+          "relative_delta_cardboard_heat_loss": 0.0011916527804964724
+        },
+        {
+          "coarse_mm": 6.0,
+          "fine_mm": 4.58257569495584,
+          "delta_C": 0.004632776999997645,
+          "relative_delta_temperature_rise": 9.771386872797547e-05,
+          "delta_cardboard_heat_loss_J": -11.093422520003514,
+          "relative_delta_cardboard_heat_loss": 0.0002453612482189205
+        },
+        {
+          "coarse_mm": 4.58257569495584,
+          "fine_mm": 3.5,
+          "delta_C": 0.0030426569999946196,
+          "relative_delta_temperature_rise": 6.417116730760355e-05,
+          "delta_cardboard_heat_loss_J": -7.393646190001164,
+          "relative_delta_cardboard_heat_loss": 0.00016355736622724988
+        }
+      ],
+      "observed_order": 1.5947286385504207,
+      "richardson_temperature_C": 69.42044716638799,
+      "fine_grid_GCI_relative_temperature_rise": 0.0001513680810222251,
+      "effective_surface_spacing_m": [
+        0.0038845081389737093,
+        0.002978426931318439,
+        0.00228132062471703
+      ],
+      "effective_refinement_ratios": [
+        1.304214683975538,
+        1.3055713866120315
+      ],
+      "gci_grids_mm": [
+        6.0,
+        4.58257569495584,
+        3.5
+      ]
+    },
+    "reference_time_refinement": [
+      {
+        "dt_s": 10.0,
+        "pizza_C": 69.33040621308636
+      },
+      {
+        "dt_s": 5.0,
+        "pizza_C": 69.31755444857566
+      },
+      {
+        "dt_s": 2.5,
+        "pizza_C": 69.31112000574394
+      }
+    ],
+    "rounded_time_refinement": [
+      {
+        "dt_s": 10.0,
+        "pizza_C": 69.41478383462447
+      },
+      {
+        "dt_s": 5.0,
+        "pizza_C": 69.40203760624375
+      },
+      {
+        "dt_s": 2.5,
+        "pizza_C": 69.39565609098378
+      }
+    ]
+  },
+  "design_differences": [
+    {
+      "solver": "python",
+      "mesh_mm": 12.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08522350027840275,
+      "rounded_minus_reference_retention_pp": 0.10586371908144088
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 1.5,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08435557989437825,
+      "rounded_minus_reference_retention_pp": 0.10825608197369263
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 2.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08435776559156238,
+      "rounded_minus_reference_retention_pp": 0.10585994751991734
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 24.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.07944146151982068,
+      "rounded_minus_reference_retention_pp": 0.11353580829690202
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 2.5,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08435327154708716,
+      "rounded_minus_reference_retention_pp": 0.1086799716871667
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 3.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08436260856045408,
+      "rounded_minus_reference_retention_pp": 0.1081139128537103
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 3.5,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08438255183038734,
+      "rounded_minus_reference_retention_pp": 0.10286320865768062
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 4.58257569495584,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08436357329507871,
+      "rounded_minus_reference_retention_pp": 0.10665506614762421
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 6.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08437762153810979,
+      "rounded_minus_reference_retention_pp": 0.10477183049871996
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 6.0,
+      "dt_s": 2.5,
+      "rounded_minus_reference_C": 0.08453608523983291,
+      "rounded_minus_reference_retention_pp": 0.10474606209665183
+    },
+    {
+      "solver": "python",
+      "mesh_mm": 6.0,
+      "dt_s": 5.0,
+      "rounded_minus_reference_C": 0.08448315766808889,
+      "rounded_minus_reference_retention_pp": 0.10475796381523139
+    },
+    {
+      "solver": "ansys",
+      "mesh_mm": 12.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08585951799999236,
+      "rounded_minus_reference_retention_pp": 0.10626114897550565
+    },
+    {
+      "solver": "ansys",
+      "mesh_mm": 24.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.07882522799999947,
+      "rounded_minus_reference_retention_pp": 0.1126329982871681
+    },
+    {
+      "solver": "ansys",
+      "mesh_mm": 3.5,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08442811099999403,
+      "rounded_minus_reference_retention_pp": 0.1029699679576197
+    },
+    {
+      "solver": "ansys",
+      "mesh_mm": 4.58257569495584,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08440097999999807,
+      "rounded_minus_reference_retention_pp": 0.10699797798152133
+    },
+    {
+      "solver": "ansys",
+      "mesh_mm": 6.0,
+      "dt_s": 10.0,
+      "rounded_minus_reference_C": 0.08443931900001189,
+      "rounded_minus_reference_retention_pp": 0.10482469586843024
+    }
+  ]
+}

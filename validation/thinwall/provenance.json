@@ -1,0 +1,35 @@
+{
+  "validated_at_UTC": "2026-11-12T17:10:27.683072+00:00",
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "gmsh": "4.15.2",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "cadquery": "2.5.2",
+  "ansys": "MAPDL 2026 R1 (workstation)",
+  "completed_python_runs": 22,
+  "completed_ansys_runs": 10,
+  "source_and_input_sha256": {
+    "thinwall.py": "d6538facf03e2511cf75ba9b99670088e7042d1b2d9a8206cdecf694401d18e7",
+    "simulator.py": "9a4aa8d3c847e015dc467672d6e46f6499c8c732ab88890374dc4852ae3085bf",
+    "ansys_bridge.py": "259877ed72bc114b2abd09635e27f7c171224bbcc032cd757d93f3e236e5a9c4",
+    "validate_thinwall.py": "d56258a8b1a089116d6218eae4befe3cc288a4b125f3175b28d66e7cbbc40697",
+    "tests/test_thinwall.py": "52c9dec81cdf98d57293b8e3fb86be48e47eb109e8c2273fc08c86f6abbb1346",
+    "examples/reference_box.step": "8258180dfac98953d61614f05b87688838692abda627abf4d77d504dd5dfb88d",
+    "examples/reference_net.dxf": "e1c50f93d46e912b6a84ac0146ee69e44d4eff99a08699998189d75408079546",
+    "jobs/thinwall_study/inputs/rounded.step": "0f1159c6a4551085f64addfb66a6ab08df7e144fd3fc81d8ea8d05744d316e8c",
+    "jobs/thinwall_study/inputs/rounded.dxf": "e1c50f93d46e912b6a84ac0146ee69e44d4eff99a08699998189d75408079546"
+  },
+  "completed_zero_error_ansys_logs_sha256": {
+    "jobs/thinwall_study/ansys/reference_12/ansys.out": "a0d134c4746d3a40989f4c6c2f9e01e2e27c750b775ba8c3c877d7cb85acb40c",
+    "jobs/thinwall_study/ansys/reference_24/ansys.out": "24572243bd2da7ee3429c0ae72f24f917434b1caf1b63c5581ad80a445740802",
+    "jobs/thinwall_study/ansys/reference_3p5/ansys.out": "274ea2d619f48d0649d97b07a3146156e6e0740cc0c7ac437e6b57e92e3842f5",
+    "jobs/thinwall_study/ansys/reference_4p58258/ansys.out": "aa4cf8a0c1d578b470515fc984c47ce00e82e298fd72cb701b96c7110874122d",
+    "jobs/thinwall_study/ansys/reference_6/ansys.out": "acb513e22e8ff6c88cb327af0a998ab99a11ece5dfc84f28d8e34ef061289b28",
+    "jobs/thinwall_study/ansys/rounded_12/ansys.out": "1a95f7fffa5b9b6c40f36ad8080011f9e8cad805959a3d65495553b96c59b27d",
+    "jobs/thinwall_study/ansys/rounded_24/ansys.out": "d0d39dc56ef21015561dfb2e45d068307eb73bf877ecb6bad1d124fb49152e5b",
+    "jobs/thinwall_study/ansys/rounded_3p5/ansys.out": "d20dcaa2793488f9d4d074841a156706974825f3e48193fa192f59ed5e525650",
+    "jobs/thinwall_study/ansys/rounded_4p58258/ansys.out": "22341db497bb4dc53843178c9f4a25884f1204b4ea45de0c2da8d4332df0ea80",
+    "jobs/thinwall_study/ansys/rounded_6/ansys.out": "e46d2dc863d3daf29879e00ed29083db8068dd6c8de0bf82368024425b6a4eb0"
+  },
+  "automated_tests": "16 passed (including 5 existing tests)"
+}

@@ -1,4 +1,4 @@
-"""Pizza box contest: voxel-conforming 3D Q1 finite element + lumped pizza/air.
+"""Pizza box contest: CAD thin-wall thermal shells + volumetric lumped pizza/air.
 
 This is an independently specified evaluator for the Fall 2026 assignment,
 not the TA's undisclosed reference model. STEP and DXF are mandatory inputs.
@@ -59,7 +59,7 @@ class GeometryError(ValueError):
     pass
 
 
-def extract_flat(dxf_path:Path, declared_units='mm'):
+def extract_flat(dxf_path:Path, declared_units='mm', thickness_m=None):
     """Read closed CUT polylines (outline / holes), report board area and fold info."""
     doc=ezdxf.readfile(str(dxf_path))
     unit=doc.header.get('$INSUNITS',0)
@@ -114,7 +114,7 @@ def extract_flat(dxf_path:Path, declared_units='mm'):
         raise GeometryError('Flat pattern must represent exactly one connected sheet (one polygon).')
     if len(folds)<1:
         raise GeometryError('No FOLD lines found. Use DXF layer FOLD.')
-    mass_g=shape.area*DEFAULTS['nominal_board_thickness_m']*DEFAULTS['box_density_kg_m3']*1000.0
+    mass_g=shape.area*(DEFAULTS['nominal_board_thickness_m'] if thickness_m is None else thickness_m)*DEFAULTS['box_density_kg_m3']*1000.0
     return {'area_m2':float(shape.area), 'mass_g':float(mass_g),
             'fold_count':len(folds), 'hole_count':len(shape.interiors),
             'unit':unit, 'connected_sheet':True,
@@ -492,7 +492,12 @@ def plot_results(thermal,moisture,outdir):
     ax.grid(alpha=.2);ax.legend(fontsize=8);fig.tight_layout();fig.savefig(outdir/'heat_flux.png');plt.close(fig)
 
 
-def run(step_path,dxf_path,outdir,voxel_mm=3.0,dt=10.,dxf_unit='mm',max_cells=2_000_000,strict=False):
+def run(step_path,dxf_path,outdir,voxel_mm=3.0,dt=10.,dxf_unit='mm',max_cells=2_000_000,strict=False,wall_model='shell',thickness_mm=3.):
+    if wall_model=='shell':
+        from thinwall import run_shell
+        return run_shell(step_path,dxf_path,outdir,voxel_mm,dt,thickness_mm,dxf_unit,max_cells)
+    if wall_model!='voxel':raise ValueError('Unknown wall model')
+    if thickness_mm!=3.:raise ValueError('Archived voxel model has fixed 3 mm material; use shell for explicit thickness')
     start=time.perf_counter()
     outdir=Path(outdir);outdir.mkdir(parents=True,exist_ok=True)
     params=DEFAULTS.copy()
@@ -566,13 +571,15 @@ def main():
     parser.add_argument('--step',required=True,help='Folded closed STEP solid file (.step/.stp), mm geometry')
     parser.add_argument('--dxf',required=True,help='One-sheet flat pattern DXF (CUT and FOLD layers)')
     parser.add_argument('--out',default='results')
-    parser.add_argument('--voxel-mm',type=float,default=3.,help='Approximate brick FEM voxel size (mm), default 3')
+    parser.add_argument('--mesh-mm','--voxel-mm',dest='voxel_mm',type=float,default=3.,help='Surface element size in mm; --voxel-mm is a compatibility alias')
+    parser.add_argument('--wall-model',choices=['shell','voxel'],default='shell',help='Default shell; voxel is the archived comparison model')
+    parser.add_argument('--wall-thickness-mm',type=float,default=3.)
     parser.add_argument('--dt',type=float,default=10.,help='Thermal time step (s), default 10')
     parser.add_argument('--dxf-unit',default='mm',choices=['mm','cm','m','in'],help='Only for DXF with no units defined')
     parser.add_argument('--max-cells',type=int,default=2_000_000)
     args=parser.parse_args()
     try:
-        result=run(args.step,args.dxf,args.out,args.voxel_mm,args.dt,args.dxf_unit,args.max_cells)
+        result=run(args.step,args.dxf,args.out,args.voxel_mm,args.dt,args.dxf_unit,args.max_cells,wall_model=args.wall_model,thickness_mm=args.wall_thickness_mm)
         print(json.dumps({'official_metrics':result['official_metrics'],'numerics':result['numerics'],
                           'runtime_s':result['runtime_s'],'report':str(Path(args.out)/'result.json')},ensure_ascii=False,indent=2))
     except Exception as exc:

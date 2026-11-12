@@ -386,16 +386,29 @@ if (-not $AnsysExe) {
 if (-not $AnsysExe -or -not (Test-Path -LiteralPath $AnsysExe)) { throw "ANSYS executable unavailable: $AnsysExe" }
 Write-Host "Running $AnsysExe"
 $env:ANS_CONSEC = 'YES'
+foreach ($name in @('history.csv','wall_samples.csv','heat_flux_raw.csv','runtime_s.txt','ansys.out')) {
+  if (Test-Path -LiteralPath $name) { Remove-Item -LiteralPath $name -Force }
+}
+$timer = [System.Diagnostics.Stopwatch]::StartNew()
 & $AnsysExe -b -np $Nproc -j PIZZA -i run.inp -o ansys.out
 $exitCode = $LASTEXITCODE
+$timer.Stop()
+[System.IO.File]::WriteAllText((Join-Path $PSScriptRoot 'runtime_s.txt'), $timer.Elapsed.TotalSeconds.ToString([System.Globalization.CultureInfo]::InvariantCulture))
 if ($exitCode -ne 0) { throw "ANSYS process exited $exitCode. Inspect ansys.out" }
+if (Select-String -LiteralPath ansys.out -Pattern '\*\*\*\s+(ERROR|FATAL)\s+\*\*\*' -Quiet) { throw 'MAPDL errors in ansys.out' }
 if (-not (Test-Path -LiteralPath history.csv)) { throw 'Missing history.csv - ANSYS did not finish post-processing.' }
 if (-not (Test-Path -LiteralPath wall_samples.csv)) { throw 'Missing wall_samples.csv - ANSYS did not finish post-processing.' }
 Write-Host 'ANSYS_RESULT_READY'
 '''
 
 
-def prepare(step,dxf,out,voxel_mm=1.8,dt=10.0,samples=64,mesh_mode='voxel'):
+def prepare(step,dxf,out,voxel_mm=6.,dt=10.0,samples=64,mesh_mode='shell',thickness_mm=3.):
+    if mesh_mode=='shell':
+        from thinwall import prepare_shell
+        meta=prepare_shell(step,dxf,out,voxel_mm,dt,samples,thickness_mm)
+        (Path(out)/'run_ansys.ps1').write_text(PS1,encoding='utf-8')
+        return meta
+    if thickness_mm!=3.:raise ValueError('Archived volume models use the original fixed 3 mm parameters; select shell for explicit thickness')
     step=Path(step).resolve();dxf=Path(dxf).resolve();out=Path(out).resolve();out.mkdir(parents=True,exist_ok=True)
     params=DEFAULTS.copy()
     shape,bbox,flat,step_mass,Vc,Va=validate_common(step,dxf)
@@ -434,6 +447,9 @@ def parse_result_csv(path,ncols):
 def finalize(folder):
     out=Path(folder).resolve()
     meta=json.loads((out/'metadata.json').read_text(encoding='utf-8'))
+    if meta.get('mesh_mode')=='shell':
+        from thinwall import finalize_shell
+        return finalize_shell(out,meta)
     h=parse_result_csv(out/'history.csv',3)
     w=parse_result_csv(out/'wall_samples.csv',3)
     nt=meta['mesh']['steps'];dt=meta['mesh']['dt_s']; ns=len(meta['sensors'])
@@ -533,6 +549,9 @@ def remote_run(jobdir,host,remote_base='pizza_box_contest/jobs',nproc=4,ansys_ex
               ['scp',f'{host}:{remotedir}/history.csv',str(jobdir/'history.csv')],
               ['scp',f'{host}:{remotedir}/wall_samples.csv',str(jobdir/'wall_samples.csv')],
               ['scp',f'{host}:{remotedir}/ansys.out',str(jobdir/'ansys.out')]]
+    meta=json.loads((jobdir/'metadata.json').read_text(encoding='utf-8'))
+    if meta.get('mesh_mode')=='shell':
+        commands.extend([['scp',f'{host}:{remotedir}/'+name,str(jobdir/name)] for name in ['heat_flux_raw.csv','runtime_s.txt']])
     if dry_run:return commands
     for i,cmd in enumerate(commands):
         print(f'[{i+1}/{len(commands)}] {shlex.join(cmd)}',flush=True)
@@ -566,7 +585,7 @@ def compare(folder_paths,outdir,allow_mixed=False):
         d=json.loads(Path(rawpath).read_text(encoding='utf-8'))
         if 'geometry_mesh_mode' in d:
             config=d.get('numerics',{})
-            signature=('ansys',d['geometry_mesh_mode'],config.get('dt_s'),config.get('mesh_mm'))
+            signature=(d.get('model_version','legacy'),d.get('solver','ansys'),d['geometry_mesh_mode'],config.get('dt_s'),config.get('mesh_mm'),d.get('geometry',{}).get('thickness_m'))
         else:
             num=d.get('numerics',{})
             geom=d.get('geometry',{})
@@ -615,9 +634,10 @@ def main():
     sub=ap.add_subparsers(dest='action',required=True)
     p=sub.add_parser('prepare',help='STEP + DXF => ANSYS .inp and PowerShell runner')
     p.add_argument('--step',required=True);p.add_argument('--dxf',required=True);p.add_argument('--out',required=True)
-    p.add_argument('--mesh-mode',choices=['voxel','step'],default='voxel',help='step requires gmsh; exact STEP-conforming mesh')
-    p.add_argument('--mesh-mm',type=float,default=1.8);p.add_argument('--dt',type=float,default=10)
+    p.add_argument('--mesh-mode',choices=['shell','voxel','step'],default='shell',help='shell is the default; voxel/step are archived volumetric models')
+    p.add_argument('--mesh-mm',type=float,default=6.);p.add_argument('--dt',type=float,default=10)
     p.add_argument('--sensors',type=int,default=64)
+    p.add_argument('--wall-thickness-mm',type=float,default=3.)
     p=sub.add_parser('ssh',help='Upload generated job, execute ANSYS on Windows through SSH, retrieve & score')
     p.add_argument('--job',required=True);p.add_argument('--host',required=True)
     p.add_argument('--remote-base',default='pizza_box_contest/jobs');p.add_argument('--nproc',type=int,default=4)
@@ -629,7 +649,7 @@ def main():
     p.add_argument('--allow-mixed',action='store_true',help='Permit incompatible fidelity/mesh settings (not recommended)')
     a=ap.parse_args()
     if a.action=='prepare':
-        result=prepare(a.step,a.dxf,a.out,a.mesh_mm,a.dt,a.sensors,a.mesh_mode)
+        result=prepare(a.step,a.dxf,a.out,a.mesh_mm,a.dt,a.sensors,a.mesh_mode,a.wall_thickness_mm)
         print(json.dumps({'status':'prepared_not_run','mesh':result['mesh'],'mass_g':result['mass_g'],
                           'mesh_mode':result['mesh_mode']},indent=2))
     elif a.action=='ssh':
